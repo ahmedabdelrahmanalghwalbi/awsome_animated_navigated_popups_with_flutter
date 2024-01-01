@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class HeroDialogRoute<T> extends PageRoute<T> {
@@ -9,16 +10,22 @@ class HeroDialogRoute<T> extends PageRoute<T> {
         super(settings: settings, fullscreenDialog: fullscreenDialog);
 
   final WidgetBuilder _builder;
+
   @override
   bool get opaque => false;
+
   @override
   bool get barrierDismissible => true;
+
   @override
   Duration get transitionDuration => const Duration(milliseconds: 300);
+
   @override
   bool get maintainState => true;
+
   @override
   Color get barrierColor => Colors.black54;
+
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {

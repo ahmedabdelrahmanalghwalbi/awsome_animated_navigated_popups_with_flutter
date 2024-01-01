@@ -4,6 +4,7 @@ class Todo {
     required this.description,
     this.items,
   });
+
   final String id;
   final String description;
   final List<Item>? items;

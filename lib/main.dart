@@ -6,19 +6,25 @@ import 'add_todo_button.dart';
 import 'custom_rect_tween.dart';
 import 'hero_dialog_route.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: Home(),
+      home: const Home(),
     );
   }
 }
 
 class Home extends StatelessWidget {
+  const Home({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +48,7 @@ class Home extends StatelessWidget {
               todos: fakeData,
             ),
           ),
-          Align(
+          const Align(
             alignment: Alignment.bottomRight,
             child: AddTodoButton(),
           )
@@ -53,10 +59,12 @@ class Home extends StatelessWidget {
 }
 
 class _TodoListContent extends StatelessWidget {
-  final List<Todo> todos;
   const _TodoListContent({
+    Key? key,
     required this.todos,
-  });
+  }) : super(key: key);
+
+  final List<Todo> todos;
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +80,12 @@ class _TodoListContent extends StatelessWidget {
 }
 
 class _TodoCard extends StatelessWidget {
-  final Todo todo;
   const _TodoCard({
+    Key? key,
     required this.todo,
-  });
+  }) : super(key: key);
+
+  final Todo todo;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +119,7 @@ class _TodoCard extends StatelessWidget {
                   ),
                   if (todo.items != null) ...[
                     const Divider(),
-                    _TodoItemsBox(items: todo.items!),
+                    _TodoItemsBox(items: todo.items ?? []),
                   ]
                 ],
               ),
@@ -122,10 +132,12 @@ class _TodoCard extends StatelessWidget {
 }
 
 class _TodoTitle extends StatelessWidget {
-  final String title;
   const _TodoTitle({
+    Key? key,
     required this.title,
-  });
+  }) : super(key: key);
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +149,7 @@ class _TodoTitle extends StatelessWidget {
 }
 
 class _TodoPopupCard extends StatelessWidget {
-  const _TodoPopupCard({required this.todo});
+  const _TodoPopupCard({Key? key, required this.todo}) : super(key: key);
   final Todo todo;
 
   @override
@@ -163,11 +175,25 @@ class _TodoPopupCard extends StatelessWidget {
                     const SizedBox(
                       height: 8,
                     ),
+                    if (todo.items != null) ...[
+                      const Divider(),
+                      _TodoItemsBox(items: todo.items ?? []),
+                    ],
                     Container(
-                      width: 400,
-                      height: 400,
-                      color: Colors.red,
-                    )
+                      margin: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const TextField(
+                        maxLines: 8,
+                        cursorColor: Colors.white,
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(8),
+                            hintText: 'Write a note...',
+                            border: InputBorder.none),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -181,8 +207,9 @@ class _TodoPopupCard extends StatelessWidget {
 
 class _TodoItemsBox extends StatelessWidget {
   const _TodoItemsBox({
+    Key? key,
     required this.items,
-  });
+  }) : super(key: key);
 
   final List<Item> items;
 
@@ -198,8 +225,9 @@ class _TodoItemsBox extends StatelessWidget {
 
 class _TodoItemTile extends StatefulWidget {
   const _TodoItemTile({
+    Key? key,
     required this.item,
-  });
+  }) : super(key: key);
 
   final Item item;
 
@@ -208,15 +236,17 @@ class _TodoItemTile extends StatefulWidget {
 }
 
 class _TodoItemTileState extends State<_TodoItemTile> {
+  void _onChanged(bool? val) {
+    setState(() {
+      widget.item.completed = val!;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: Checkbox(
-        onChanged: (val) {
-          setState(() {
-            widget.item.completed = val!;
-          });
-        },
+        onChanged: _onChanged,
         value: widget.item.completed,
       ),
       title: Text(widget.item.description),

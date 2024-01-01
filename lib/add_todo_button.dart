@@ -4,6 +4,8 @@ import 'custom_rect_tween.dart';
 import 'hero_dialog_route.dart';
 
 class AddTodoButton extends StatelessWidget {
+  const AddTodoButton({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -11,7 +13,7 @@ class AddTodoButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(HeroDialogRoute(builder: (context) {
-            return _AddTodoPopupCard();
+            return const _AddTodoPopupCard();
           }));
         },
         child: Hero(
@@ -38,6 +40,8 @@ class AddTodoButton extends StatelessWidget {
 const String _heroAddTodo = 'add-todo-hero';
 
 class _AddTodoPopupCard extends StatelessWidget {
+  const _AddTodoPopupCard({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -82,7 +86,7 @@ class _AddTodoPopupCard extends StatelessWidget {
                       color: Colors.white,
                       thickness: 0.2,
                     ),
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () {},
                       child: const Text('Add'),
                     ),

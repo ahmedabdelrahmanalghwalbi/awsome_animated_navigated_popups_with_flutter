@@ -11,23 +11,23 @@ final fakeData = [
       description: 'Research',
     ),
   ]),
-  Todo(
+  const Todo(
     id: 'todo-tag-2',
     description: 'Homework',
   ),
-  Todo(
+  const Todo(
     id: 'todo-tag-3',
     description: 'Like this video',
   ),
-  Todo(
+  const Todo(
     id: 'todo-tag-4',
     description: 'Subscribe',
   ),
-  Todo(
+  const Todo(
     id: 'todo-tag-5',
     description: 'Learn Riverpod',
   ),
-  Todo(
+  const Todo(
     id: 'todo-tag-6',
     description: 'Sell Amway products',
   ),
@@ -45,7 +45,7 @@ final fakeData = [
       description: 'Chip and dip',
     ),
   ]),
-  Todo(
+  const Todo(
     id: 'todo-tag-8',
     description: 'Play',
   ),
